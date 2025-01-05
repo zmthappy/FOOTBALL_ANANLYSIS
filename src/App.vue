@@ -10,6 +10,16 @@ async function test() {
 
 }
 
+async function getInfoPost() {
+  let res = await request.Post('/football', {
+    name: "张三",
+    id: 1,
+    address: '地址'
+  })
+  console.log(res, "res");
+
+}
+
 onMounted(() => {
   test();
 
@@ -20,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div @click="getInfoPost">
     11111111111
   </div>
 </template>

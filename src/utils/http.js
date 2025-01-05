@@ -2,9 +2,9 @@
 import axios from "axios";
 let api_base_url = ''
 if (import.meta.env.MODE === 'development') {
-    api_base_url = 'http://localhost:3000/'
+    api_base_url = import.meta.env.VITE_APP_APIBASE
 } else if (import.meta.env.MODE === 'production') {
-    api_base_url = 'https://www.ttyingqiu.com'
+    api_base_url = import.meta.env.VITE_APP_APIBASE
 }
 axios.defaults.baseURL = api_base_url;
 axios.defaults.timeout = 5000;
@@ -21,17 +21,18 @@ const http = axios.create({
     }
 });
 
-const post = http.post;
 const Post = (url, params, options = {}) => {
     return axios.post(
         url,
-        params
+        params,
+        {
+            'Content-Type': 'multipart/form-data'
+        }
     ).then((data = {}) => {
         return Promise.resolve(data.data ? data.data.data : false);
     });
 };
 
-const get = http.post;
 const Get = (url, params) => {
     return get(
         url,
