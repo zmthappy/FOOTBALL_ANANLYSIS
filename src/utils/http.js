@@ -7,7 +7,6 @@ if (import.meta.env.MODE === 'development') {
     api_base_url = import.meta.env.VITE_APP_APIBASE
 }
 axios.defaults.baseURL = api_base_url;
-axios.defaults.timeout = 5000;
 
 const http = axios.create({
     headers: {
@@ -29,7 +28,7 @@ const Post = (url, params, options = {}) => {
             'Content-Type': 'multipart/form-data'
         }
     ).then((data = {}) => {
-        return Promise.resolve(data.data ? data.data.data : false);
+        return Promise.resolve(data.data ? data.data : false);
     });
 };
 
@@ -38,7 +37,7 @@ const Get = (url, params) => {
         url,
         params,
     ).then((data = {}) => {
-        return Promise.resolve(data.data ? data.data.data : false);
+        return Promise.resolve(data.data ? data.data : false);
     });
 };
 
