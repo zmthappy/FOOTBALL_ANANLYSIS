@@ -16,7 +16,7 @@
         <el-button type="primary" @click="getlist">重新获取</el-button>
       </div>
     </div>
-    <div class="card-container" v-loading.lock="state.cardRefresh">
+    <div class="card-container" v-loading="state.cardRefresh">
       <div class="card" v-for="item in state.matchToday" :key="item.matchId">
         <div class="card-top-content">
           <!-- 对局对比 -->
