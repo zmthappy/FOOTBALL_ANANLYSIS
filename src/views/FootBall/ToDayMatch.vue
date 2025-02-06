@@ -924,6 +924,7 @@ export default defineComponent({
 
 :deep(.el-table--enable-row-transition .el-table__body td.el-table__cell) {
   color: #ffffff;
+  font-size: 14px;
 }
 
 :deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
