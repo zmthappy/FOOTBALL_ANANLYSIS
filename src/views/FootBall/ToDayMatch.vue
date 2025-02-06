@@ -16,7 +16,7 @@
         <el-button type="primary" @click="getlist">重新获取</el-button>
       </div>
     </div>
-    <div class="card-container" v-loading="state.cardRefresh">
+    <div class="card-container" v-if="!state.cardRefresh">
       <div class="card" v-for="item in state.matchToday" :key="item.matchId">
         <div class="card-top-content">
           <!-- 对局对比 -->
@@ -263,10 +263,61 @@
           </div>
         </div>
         <div class="card-top-content">
-          <!-- 机构分析 -->
-          <div class="card-top-title">
-            机构分析【{{ item.homeTeamLeageaName }}】
+          <!-- 历史对战 -->
+          <div class="card-top-title">历史近六场对战</div>
+          <div class="flex-layout" style="align-items: flex-start">
+            <div class="flex-layout base-message" style="width: 100%">
+              <div class="base-tema-information" style="width: 100%">
+                <el-row>
+                  <el-table
+                    :data="item.historyMatchSix"
+                    border
+                    style="width: 100%"
+                    :row-class-name="setRowClass"
+                  >
+                    <el-table-column
+                      prop="amidithion"
+                      label="赛果"
+                      width="50"
+                    />
+                    <el-table-column
+                      prop="leagueName"
+                      label="联赛"
+                      width="80"
+                    />
+                    <el-table-column
+                      prop="firstAsiaHandicap"
+                      label="初盘"
+                      width="60"
+                    />
+                    <el-table-column prop="homeName" label="对战双方">
+                      <template #default="scope"
+                        >{{ scope.row.homeName }} --
+                        {{ scope.row.awayName }}
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="fullResult" label="结果" width="60">
+                      <template #default="scope">
+                        <div style="font-size: 20px; color: aquamarine">
+                          {{ scope.row.fullResult }}
+                        </div>
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="matchTime" label="时间" width="90">
+                    </el-table-column>
+                  </el-table>
+                </el-row>
+                <div class="six-match-sumResult">
+                  {{ item.hisotryResult }}
+                  ({{ item.hisotryGoal }}) ({{ item.hisotrySixMatch }})
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="card-top-content">
+          <!-- 机构分析 -->
+          <div class="card-top-title">机构分析【{{ item.leagueName }}】</div>
           <div class="flex-layout">
             <div class="flex-layout base-message">
               <div class="card-team-name">{{ item.homeName }}</div>
@@ -587,6 +638,8 @@
         </div>
       </div>
     </div>
+    <!-- 获取数据刷新效果页面 -->
+    <div class="card-container" v-else v-loading="state.cardRefresh"></div>
   </div>
 </template>
 <script lang="ts">
@@ -599,18 +652,10 @@ import {
   reactive,
   toRefs,
 } from "vue";
-import FTTable from "../../components/FTTable.vue";
 export default defineComponent({
   name: "toDayMatch",
-  components: {
-    FTTable,
-  },
-  props: {
-    name: {
-      type: String,
-      default: "",
-    },
-  },
+  components: {},
+  props: {},
   emits: ["success"],
   setup(props, { emit }) {
     const { appContext } = getCurrentInstance();
@@ -673,7 +718,7 @@ export default defineComponent({
     function searchTimeChange() {
       getlist();
     }
-
+    // 设置赛果不同的行样式
     function setRowClass({ row }) {
       let className = "single-match-lose";
       switch (row.amidithion) {

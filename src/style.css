@@ -12,15 +12,23 @@
   color: #213547;
   background-color: #ffffff;
 
-  /* 设置整体配色 */
-  --primary-color--:#8B0000;
+  /* 设置整体配色---朱红色 */
+  /* --primary-color--: #8b0000;
   --secondary-assistant-color--: #800000;
-  --primary-background--: #F5F5DC;
+  --primary-background--: #f5f5dc;
   --primary-font-color--: #333333;
-  --primary-focus-color--:#B8860B;
+  --primary-focus-color--: #b8860b; */
+
+  /* 设置整体配色---浅红色系 */
+  --primary-color--: #dc2626;
+  --secondary-assistant-color--: #f87171;
+  --primary-background--: #f5f5dc;
+  --primary-font-color--: #111827;
+  --secondary-font-color--: #6b7280;
+  --primary-focus-color--: #9acd32;
 
   /* 修改v-loading的哑颜色 */
-  --el-loading-spinner-color: var(--primary-color--); 
+  --el-loading-spinner-color: var(--primary-color--);
 }
 
 body {
@@ -32,21 +40,19 @@ body {
   max-width: 100%;
 }
 
-
 /*布局信息 */
 .flex-layout {
   display: flex;
   align-items: center;
 }
 
-
 /* 按钮样式调整 */
-.el-button--primary {
+/* .el-button--primary {
   --el-button-bg-color: var(--primary-color--);
   --el-button-border-color: var(--primary-color--);
   --el-button-hover-bg-color: var(--secondary-assistant-color--);
-  --el-button-hover-border-color:var(--secondary-assistant-color--);
-}
+  --el-button-hover-border-color: var(--secondary-assistant-color--);
+} */
 
 /* 全局滚动条样式 */
 ::-webkit-scrollbar {
@@ -62,70 +68,72 @@ body {
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-  background:var(--primary-color--); /* 滑块背景色 */
+  background: var(--primary-color--); /* 滑块背景色 */
   border-radius: 4px; /* 圆角 */
 }
 
 /* 滚动条滑块悬停效果 */
 ::-webkit-scrollbar-thumb:hover {
-  background-color:var(--secondary-assistant-color--); /* 悬停时滑块背景色 */
+  background-color: var(--secondary-assistant-color--); /* 悬停时滑块背景色 */
 }
 
 /* 输入框 */
-.el-input__wrapper.is-focus{
-    box-shadow: 0 0 1px var(--primary-color--) inset;/*聚焦*/
-}
+/* .el-input__wrapper.is-focus {
+  box-shadow: 0 0 1px var(--primary-color--) inset; 
+} */
 
 /* 时间选择器颜色 */
-.el-date-picker{
-  --el-datepicker-active-color: var(--primary-color--); /* 选中日期的颜色 */
+/* .el-date-picker {
+  --el-datepicker-active-color: var(--primary-color--); 
   --el-datepicker-hover-text-color: var(--secondary-assistant-color--);
-  --el-datepicker-text-color: #333; /* 文本颜色 */
-  --el-datepicker-border-color: #ccc; /* 边框颜色 */
-  --el-datepicker-hover-color: #f0f0f0; /* 悬停背景色 */
-  --el-datepicker-header-background-color: #f9f9f9; /* 头部背景色 */
-  --el-datepicker-cell-disabled-color: #ddd; /* 禁用日期的颜色 */
-}
+  --el-datepicker-text-color: #333; 
+  --el-datepicker-border-color: #ccc; 
+  --el-datepicker-hover-color: #f0f0f0; 
+  --el-datepicker-header-background-color: #f9f9f9; 
+  --el-datepicker-cell-disabled-color: #ddd; 
+} */
 
 /* 单选组件 */
-.el-radio{
-    --el-radio-input-border-color-hover:var(--primary-color--);
+/* .el-radio {
+  --el-radio-input-border-color-hover: var(--primary-color--);
 }
 
-.el-radio__input.is-checked .el-radio__inner{
-  background:var(--primary-color--);
-  border-color:var(--primary-color--);
+.el-radio__input.is-checked .el-radio__inner {
+  background: var(--primary-color--);
+  border-color: var(--primary-color--);
 }
 
-.el-radio__input.is-checked+.el-radio__label{
+.el-radio__input.is-checked + .el-radio__label {
   color: var(--primary-color--);
-}
+} */
 
 /* 表格样式调整 */
-.el-table--border th.el-table__cell{
+.el-table--border th.el-table__cell {
   font-size: 12px;
   padding: 0px;
   color: #333333;
 }
 
-.el-table--enable-row-transition .el-table__body td.el-table__cell{
+.el-table--enable-row-transition .el-table__body td.el-table__cell {
   font-size: 12px;
   padding: 4px 0px;
   color: #333333;
 }
 
 /* 分页信息 */
-.el-pagination{
-    --el-pagination-hover-color:var(--primary-font-color--);
+/* .el-pagination {
+  --el-pagination-hover-color: var(--primary-font-color--);
 }
 
-.el-pagination.is-background .btn-next.is-active, .el-pagination.is-background .btn-prev.is-active, .el-pagination.is-background .el-pager li.is-active{
-    background-color: var(--primary-color--);
-    color: #ffffff;
-}
+.el-pagination.is-background .btn-next.is-active,
+.el-pagination.is-background .btn-prev.is-active,
+.el-pagination.is-background .el-pager li.is-active {
+  background-color: var(--primary-color--);
+  color: #ffffff;
+} */
 
 /* loading样式 */
-.el-loading-mask{
+.el-loading-mask {
   height: 100%;
 }
 
