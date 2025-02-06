@@ -45,7 +45,7 @@
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
-                      width="60"
+                      width="80"
                     />
                     <el-table-column prop="homeName" label="对战双方">
                       <template #default="scope"
@@ -96,7 +96,7 @@
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
-                      width="60"
+                      width="80"
                     />
                     <el-table-column prop="homeName" label="对战双方">
                       <template #default="scope"
@@ -153,7 +153,7 @@
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
-                      width="60"
+                      width="80"
                     />
                     <el-table-column prop="homeName" label="对战双方">
                       <template #default="scope"
@@ -204,7 +204,7 @@
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
-                      width="60"
+                      width="80"
                     />
                     <el-table-column prop="homeName" label="对战双方">
                       <template #default="scope"
@@ -291,7 +291,7 @@
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
-                      width="60"
+                      width="80"
                     />
                     <el-table-column prop="homeName" label="对战双方">
                       <template #default="scope"
