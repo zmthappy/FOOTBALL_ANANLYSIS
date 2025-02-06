@@ -265,7 +265,10 @@
         <div class="card-top-content">
           <!-- 历史对战 -->
           <div class="card-top-title">历史近六场对战</div>
-          <div class="flex-layout" style="align-items: flex-start">
+          <div
+            class="flex-layout"
+            style="align-items: flex-start; padding: 10px 80px"
+          >
             <div class="flex-layout base-message" style="width: 100%">
               <div class="base-tema-information" style="width: 100%">
                 <el-row>

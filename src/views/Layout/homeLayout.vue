@@ -108,13 +108,15 @@ export default defineComponent({
   }
 
   .mune-item-active {
-    color: var(--primary-focus-color--);
+    //color: var(--primary-focus-color--);
+    color: bisque;
     background-color: var(--secondary-assistant-color--);
   }
 
   .mune-item:hover {
     top: -2px;
-    color: var(--primary-focus-color--);
+    // color: var(--primary-focus-color--);
+    color: bisque;
     // font-size: 18px;
   }
 
