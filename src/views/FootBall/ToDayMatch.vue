@@ -644,6 +644,7 @@
 </template>
 <script lang="ts">
 import dayjs from "dayjs";
+import { useFootballStore } from "@/pinia/footballPinia";
 import {
   defineComponent,
   getCurrentInstance,
@@ -658,6 +659,7 @@ export default defineComponent({
   props: {},
   emits: ["success"],
   setup(props, { emit }) {
+    const footballStore = useFootballStore();
     const { appContext } = getCurrentInstance();
     const request = appContext.config.globalProperties.$https;
     const state = reactive({
@@ -735,7 +737,9 @@ export default defineComponent({
       return className;
     }
 
-    onMounted(() => {});
+    onMounted(() => {
+      console.log(footballStore.test, "foot");
+    });
     return {
       state,
       getlist,
