@@ -461,9 +461,9 @@
                           <el-radio :label="1">胜</el-radio>
                           <el-radio :label="2">平</el-radio>
                           <el-radio :label="3">负</el-radio>
-                          <el-radio :label="4">让胜</el-radio>
+                          <!-- <el-radio :label="4">让胜</el-radio>
                           <el-radio :label="5">让平</el-radio>
-                          <el-radio :label="6">让负</el-radio>
+                          <el-radio :label="6">让负</el-radio> -->
                         </el-radio-group>
                       </el-form-item>
                     </el-col>
@@ -495,6 +495,17 @@
                               ? "-" + item.oppomnentTeamGapDays + "天"
                               : ""
                           }}
+                          <span style="font-size: 12px">
+                            [{{
+                              item.oppomnentTeamVisiterHomeTime
+                                ? "主：" + item.oppomnentTeamVisiterHomeTime
+                                : ""
+                            }}{{
+                              item.oppomnentTeamAwayTime
+                                ? "==客：" + item.oppomnentTeamAwayTime
+                                : ""
+                            }}]
+                          </span>
                         </div>
                       </el-form-item>
                     </el-col>
@@ -566,6 +577,13 @@
                       <el-form-item label="排名盘口">
                         <div class="focus-font-style">
                           {{ item.TfinallyPk }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="各自主客定位">
+                        <div class="focus-font-style">
+                          {{ item.respectivePk }}
                         </div>
                       </el-form-item>
                     </el-col>
@@ -885,33 +903,6 @@ export default defineComponent({
       }
     }
   }
-}
-
-.card-title {
-  font-size: 1.5rem;
-  margin: 0 0 10px;
-  color: #333333;
-}
-
-.card-text {
-  font-size: 1rem;
-  color: #666666;
-  margin: 0 0 15px;
-}
-
-/* 卡片按钮 */
-.card-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #d32f2f;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.card-button:hover {
-  background-color: #b71c1c;
 }
 
 :deep(.el-form-item) {
