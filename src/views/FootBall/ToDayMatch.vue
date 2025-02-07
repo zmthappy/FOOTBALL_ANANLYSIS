@@ -461,9 +461,9 @@
                           <el-radio :label="1">胜</el-radio>
                           <el-radio :label="2">平</el-radio>
                           <el-radio :label="3">负</el-radio>
-                          <!-- <el-radio :label="4">让胜</el-radio>
+                          <el-radio :label="4">让胜</el-radio>
                           <el-radio :label="5">让平</el-radio>
-                          <el-radio :label="6">让负</el-radio> -->
+                          <el-radio :label="6">让负</el-radio>
                         </el-radio-group>
                       </el-form-item>
                     </el-col>
