@@ -46,14 +46,18 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="80"
+                      width="90"
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
                       width="80"
                     />
-                    <el-table-column prop="homeName" label="对战双方">
+                    <el-table-column
+                      prop="homeName"
+                      label="对战双方"
+                      show-overflow-tooltip
+                    >
                       <template #default="scope"
                         >{{ scope.row.homeName }} --
                         {{ scope.row.awayName }}
@@ -97,14 +101,18 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="80"
+                      width="90"
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
                       width="80"
                     />
-                    <el-table-column prop="homeName" label="对战双方">
+                    <el-table-column
+                      prop="homeName"
+                      label="对战双方"
+                      show-overflow-tooltip
+                    >
                       <template #default="scope"
                         >{{ scope.row.homeName }} --
                         {{ scope.row.awayName }}
@@ -154,14 +162,18 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="80"
+                      width="90"
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
                       width="80"
                     />
-                    <el-table-column prop="homeName" label="对战双方">
+                    <el-table-column
+                      prop="homeName"
+                      label="对战双方"
+                      show-overflow-tooltip
+                    >
                       <template #default="scope"
                         >{{ scope.row.homeName }} --
                         {{ scope.row.awayName }}
@@ -205,14 +217,18 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="80"
+                      width="90"
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
                       width="80"
                     />
-                    <el-table-column prop="homeName" label="对战双方">
+                    <el-table-column
+                      prop="homeName"
+                      label="对战双方"
+                      show-overflow-tooltip
+                    >
                       <template #default="scope"
                         >{{ scope.row.homeName }} --
                         {{ scope.row.awayName }}
@@ -292,14 +308,18 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="80"
+                      width="90"
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
                       label="初盘"
                       width="80"
                     />
-                    <el-table-column prop="homeName" label="对战双方">
+                    <el-table-column
+                      prop="homeName"
+                      label="对战双方"
+                      show-overflow-tooltip
+                    >
                       <template #default="scope"
                         >{{ scope.row.homeName }} --
                         {{ scope.row.awayName }}
@@ -502,15 +522,15 @@
                               : ""
                           }}
                           <span style="font-size: 12px">
-                            [{{
+                            {{
                               item.oppomnentTeamVisiterHomeTime
-                                ? "主：" + item.oppomnentTeamVisiterHomeTime
+                                ? "[主：" + item.oppomnentTeamVisiterHomeTime
                                 : ""
                             }}{{
                               item.oppomnentTeamAwayTime
-                                ? "==客：" + item.oppomnentTeamAwayTime
+                                ? "==客：" + item.oppomnentTeamAwayTime + "]"
                                 : ""
-                            }}]
+                            }}
                           </span>
                         </div>
                       </el-form-item>
