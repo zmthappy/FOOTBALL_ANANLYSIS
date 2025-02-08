@@ -26,7 +26,19 @@
   --primary-font-color--: #111827;
   --secondary-font-color--: #6b7280;
   --primary-focus-color--: #9acd32;
+  --single-match-draw--: pink;
 
+  /* 设置整体配色---海军蓝 */
+  /* --primary-color--: #003366;
+  --secondary-assistant-color--: #f0f0f0;
+  --primary-background--: #f5f5dc;
+  --secondary-assistant-background-color--: #fffdd0;
+  --primary-font-color--: #2c3e50;
+  --secondary-font-color--: #f5f5dc;
+  --third-assistant-font-color--: #666666;
+  --primary-focus-color--: #ffd1dc;
+
+  --single-match-draw--: #e5e5e5; */
   /* 修改v-loading的哑颜色 */
   --el-loading-spinner-color: var(--primary-color--);
 }
@@ -111,13 +123,13 @@ body {
 .el-table--border th.el-table__cell {
   font-size: 12px;
   padding: 0px;
-  color: #333333;
+  color: var(--primary-font-color--);
 }
 
 .el-table--enable-row-transition .el-table__body td.el-table__cell {
   font-size: 12px;
   padding: 4px 0px;
-  color: #333333;
+  color: var(--primary-font-color--);
 }
 
 /* 分页信息 */
@@ -138,13 +150,13 @@ body {
 }
 
 .single-match-draw {
-  background-color: pink !important;
+  background-color: var(--single-match-draw--) !important;
 }
 
 .single-match-lose {
-  background-color: #708090 !important;
+  background-color: grey !important;
 }
 
 .single-match-win {
-  background-color: var(--secondary-assistant-color--) !important;
+  background-color: var(--primary-color--) !important;
 }

@@ -13,10 +13,16 @@
       </div>
       <div>
         <el-button type="primary" @click="clearPredict">清除预测</el-button>
-        <el-button type="primary" @click="getlist">重新获取</el-button>
+        <el-button type="primary" @click="getlist" :loading="state.cardRefresh"
+          >重新获取</el-button
+        >
       </div>
     </div>
-    <div class="card-container" v-if="!state.cardRefresh">
+    <div
+      class="card-container"
+      ref="cardFootballRef"
+      v-loading="state.cardRefresh"
+    >
       <div class="card" v-for="item in state.matchToday" :key="item.matchId">
         <div class="card-top-content">
           <!-- 对局对比 -->
@@ -660,7 +666,7 @@
       </div>
     </div>
     <!-- 获取数据刷新效果页面 -->
-    <div class="card-container" v-else v-loading="state.cardRefresh"></div>
+    <!-- <div class="card-container" v-else ></div> -->
   </div>
 </template>
 <script lang="ts">
@@ -672,6 +678,7 @@ import {
   inject,
   onMounted,
   reactive,
+  ref,
   toRefs,
 } from "vue";
 export default defineComponent({
@@ -682,6 +689,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const footballStore = useFootballStore();
     const { appContext } = getCurrentInstance();
+    const cardFootballRef = ref(null);
     const request = appContext.config.globalProperties.$https;
     const state = reactive({
       matchToday: [],
@@ -698,7 +706,12 @@ export default defineComponent({
     });
     // 获取今日的数据
     async function getlist() {
+      cardFootballRef.value.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
       state.cardRefresh = true;
+      cardFootballRef.value.style = "overflow:hidden";
       let predictList = JSON.parse(localStorage.getItem("predict")) || [];
       let res = await request.Post("/football", {
         queryTime: state.queryTime,
@@ -714,6 +727,7 @@ export default defineComponent({
         });
         state.matchToday = res.Data;
       }
+      cardFootballRef.value.style = "";
       state.cardRefresh = false;
     }
     // 预测改变
@@ -768,6 +782,7 @@ export default defineComponent({
       clearPredict,
       searchTimeChange,
       setRowClass,
+      cardFootballRef,
     };
   },
 });
