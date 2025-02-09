@@ -13,12 +13,12 @@
   background-color: #ffffff;
 
   /* 设置整体配色---朱红色 */
-  --primary-color--: #8b0000;
+  /* --primary-color--: #8b0000;
   --secondary-assistant-color--: #800000;
   --primary-background--: #f5f5dc;
   --primary-font-color--: #333333;
   --primary-focus-color--: #b8860b;
-  --single-match-draw--: pink;
+  --single-match-draw--: pink; */
 
   /* 设置整体配色---浅红色系 */
   /* --primary-color--: #dc2626;
@@ -39,6 +39,18 @@
   --third-assistant-font-color--: #666666;
   --primary-focus-color--: #ffd1dc;
   --single-match-draw--: #e5e5e5; */
+
+    /* 设置整体配色---浅粉色 */
+    --primary-color--: #FFB6C1;
+    --secondary-assistant-color--: #FFE4E1;
+    --primary-background--: #FFE4E1;
+    --secondary-assistant-background-color--: #FFC0CB;
+    --primary-font-color--: #333333;
+    /* --secondary-font-color--: #f5f5dc; */
+    --third-assistant-font-color--: #666666;
+    --primary-focus-color--: #DB7093;
+    --single-match-draw--: #e5e5e5;
+
   --el-loading-spinner-color: var(--primary-color--);
 }
 
@@ -153,7 +165,7 @@ body {
 }
 
 .single-match-lose {
-  background-color: #333333 !important;
+  background-color: #666666 !important;
 }
 
 .single-match-win {

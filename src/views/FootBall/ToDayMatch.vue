@@ -487,9 +487,35 @@
                           <el-radio :label="1">胜</el-radio>
                           <el-radio :label="2">平</el-radio>
                           <el-radio :label="3">负</el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="预测结果">
+                        <el-radio-group
+                          v-model="item.prediceResultWho"
+                          @change="(val) => prediceResultWhoChange(val, item)"
+                        >
+                          <el-radio :label="0">无</el-radio>
                           <el-radio :label="4">让胜</el-radio>
                           <el-radio :label="5">让平</el-radio>
                           <el-radio :label="6">让负</el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="预测概率">
+                        <el-radio-group
+                          v-model="item.prediceResultPrecent"
+                          @change="(val) => predictPrecentchange(val, item)"
+                        >
+                          <el-radio :label="0">+++</el-radio>
+                          <el-radio :label="1">++</el-radio>
+                          <el-radio :label="2">+</el-radio>
+                          <el-radio :label="3">0</el-radio>
+                          <el-radio :label="4">-</el-radio>
+                          <el-radio :label="5">--</el-radio>
+                          <el-radio :label="6">---</el-radio>
                         </el-radio-group>
                       </el-form-item>
                     </el-col>
@@ -714,6 +740,8 @@ export default defineComponent({
     const state = reactive({
       matchToday: [],
       predict: [],
+      predictWho: [],
+      predictPrecent: [],
       cardRefresh: false,
       queryTime: dayjs().format("YYYY-MM-DD"),
       tableOption: {
@@ -733,15 +761,29 @@ export default defineComponent({
       state.cardRefresh = true;
       cardFootballRef.value.style = "overflow:hidden";
       let predictList = JSON.parse(localStorage.getItem("predict")) || [];
+      let predictPrecent = JSON.parse(localStorage.getItem("predictTwo")) || [];
+      let predictWho = JSON.parse(localStorage.getItem("predictWho")) || [];
       let res = await request.Post("/football", {
         queryTime: state.queryTime,
       });
       if (res.State) {
         res.Data.forEach((item) => {
           item.prediceResult = 0;
+          item.prediceResultPrecent = 3;
+          item.prediceResultWho = 0;
           for (const pItem of predictList) {
             if (pItem.matchId == item.matchId) {
               item.prediceResult = pItem.result;
+            }
+          }
+          for (const pItem2 of predictPrecent) {
+            if (pItem2.matchId == item.matchId) {
+              item.prediceResultPrecent = pItem2.result;
+            }
+          }
+          for (const pItem3 of predictWho) {
+            if (pItem3.matchId == item.matchId) {
+              item.prediceResultWho = pItem3.result;
             }
           }
         });
@@ -767,6 +809,44 @@ export default defineComponent({
       }
       localStorage.setItem("predict", JSON.stringify(state.predict));
     }
+
+    // 预测改变
+    function prediceResultWhoChange(val, item) {
+      let index = state.predictWho.findIndex((t) => t.matchId == item.matchId);
+      if (index !== -1) {
+        for (const prediceItem of state.predictWho) {
+          if (prediceItem.matchId == item.matchId) {
+            prediceItem.result = val;
+          }
+        }
+      } else {
+        state.predictWho.push({
+          result: val,
+          matchId: item.matchId,
+        });
+      }
+      localStorage.setItem("predictWho", JSON.stringify(state.predictWho));
+    }
+
+    function predictPrecentchange(val, item) {
+      let index = state.predictPrecent.findIndex(
+        (t) => t.matchId == item.matchId
+      );
+      if (index !== -1) {
+        for (const prediceItem of state.predictPrecent) {
+          if (prediceItem.matchId == item.matchId) {
+            prediceItem.result = val;
+          }
+        }
+      } else {
+        state.predictPrecent.push({
+          result: val,
+          matchId: item.matchId,
+        });
+      }
+      localStorage.setItem("predictTwo", JSON.stringify(state.predictPrecent));
+    }
+
     // 清空缓存
     function clearPredict() {
       localStorage.clear();
@@ -803,6 +883,8 @@ export default defineComponent({
       searchTimeChange,
       setRowClass,
       cardFootballRef,
+      predictPrecentchange,
+      prediceResultWhoChange,
     };
   },
 });
@@ -870,7 +952,7 @@ export default defineComponent({
 
         .focus-font-style {
           font-size: 20px;
-          color: var(--secondary-assistant-color--);
+          color: var(--primary-focus-color--);
         }
 
         .final-pk {
