@@ -46,7 +46,8 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="90"
+                      width="60"
+                      show-overflow-tooltip
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
@@ -101,7 +102,8 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="90"
+                      width="60"
+                      show-overflow-tooltip
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
@@ -162,7 +164,8 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="90"
+                      width="60"
+                      show-overflow-tooltip
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
@@ -217,7 +220,8 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="90"
+                      width="60"
+                      show-overflow-tooltip
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
@@ -308,7 +312,8 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="90"
+                      width="60"
+                      show-overflow-tooltip
                     />
                     <el-table-column
                       prop="firstAsiaHandicap"
