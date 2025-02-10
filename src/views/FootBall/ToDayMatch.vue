@@ -351,7 +351,9 @@
         </div>
         <div class="card-top-content">
           <!-- 机构分析 -->
-          <div class="card-top-title">机构分析【{{ item.leagueName }}】</div>
+          <div class="card-top-title">
+            INSTITUTION分析【{{ item.leagueName }}】
+          </div>
           <div class="flex-layout">
             <div class="flex-layout base-message">
               <div class="card-team-name">{{ item.homeName }}</div>
@@ -532,7 +534,7 @@
         </div>
         <div class="card-top-content">
           <!-- 盘口对比 -->
-          <div class="card-top-title">盘口对比</div>
+          <div class="card-top-title">PK对比</div>
           <div class="flex-layout">
             <div class="flex-layout base-message">
               <div class="base-tema-information">
@@ -835,7 +837,7 @@ export default defineComponent({
 
     function predictPrecentchange(val, item) {
       let index = state.predictPrecent.findIndex(
-        (t) => t.matchId == item.matchId
+        (t) => t.matchId == item.matchId,
       );
       if (index !== -1) {
         for (const prediceItem of state.predictPrecent) {
