@@ -40,16 +40,16 @@
   --primary-focus-color--: #ffd1dc;
   --single-match-draw--: #e5e5e5; */
 
-    /* 设置整体配色---浅粉色 */
-    --primary-color--: #FFB6C1;
-    --secondary-assistant-color--: #FFE4E1;
-    --primary-background--: #FFE4E1;
-    --secondary-assistant-background-color--: #FFC0CB;
-    --primary-font-color--: #333333;
-    /* --secondary-font-color--: #f5f5dc; */
-    --third-assistant-font-color--: #666666;
-    --primary-focus-color--: #DB7093;
-    --single-match-draw--: #e5e5e5;
+  /* 设置整体配色---浅粉色 */
+  --primary-color--: #ffb6c1;
+  --secondary-assistant-color--: #ffe4e1;
+  --primary-background--: #ffe4e1;
+  --secondary-assistant-background-color--: #ffc0cb;
+  --primary-font-color--: #333333;
+  /* --secondary-font-color--: #f5f5dc; */
+  --third-assistant-font-color--: #666666;
+  --primary-focus-color--: #db7093;
+  --single-match-draw--: #e5e5e5;
 
   --el-loading-spinner-color: var(--primary-color--);
 }

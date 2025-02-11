@@ -66,7 +66,7 @@
                     </el-table-column>
                     <el-table-column prop="fullResult" label="结果" width="60">
                       <template #default="scope">
-                        <div style="font-size: 20px; color: aquamarine">
+                        <div style="font-size: 20px; color: #b8860b">
                           {{ scope.row.fullResult }}
                         </div>
                       </template>
@@ -77,7 +77,7 @@
                 </el-row>
                 <div class="six-match-sumResult">
                   {{ item.matchResultHome }}
-                  ({{ item.homeGOal }})
+                  ({{ item.homeGOal }}) ({{ item.homeTeamType }})
                 </div>
                 <div class="six-match-sumResult">
                   {{ item.matchResultHomeresult }}
@@ -122,7 +122,7 @@
                     </el-table-column>
                     <el-table-column prop="fullResult" label="结果" width="60">
                       <template #default="scope">
-                        <div style="font-size: 20px; color: aquamarine">
+                        <div style="font-size: 20px; color: #b8860b">
                           {{ scope.row.fullResult }}
                         </div>
                       </template>
@@ -133,7 +133,7 @@
                 </el-row>
                 <div class="six-match-sumResult">
                   {{ item.matchResultVisit }}
-                  ({{ item.visitedGoals }})
+                  ({{ item.visitedGoals }})({{ item.awayType }})
                 </div>
                 <div class="six-match-sumResult">
                   {{ item.matchResultVisitresult }}
@@ -184,7 +184,7 @@
                     </el-table-column>
                     <el-table-column prop="fullResult" label="结果" width="60">
                       <template #default="scope">
-                        <div style="font-size: 20px; color: aquamarine">
+                        <div style="font-size: 20px; color: #b8860b">
                           {{ scope.row.fullResult }}
                         </div>
                       </template>
@@ -240,7 +240,7 @@
                     </el-table-column>
                     <el-table-column prop="fullResult" label="结果" width="60">
                       <template #default="scope">
-                        <div style="font-size: 20px; color: aquamarine">
+                        <div style="font-size: 20px; color: #b8860b">
                           {{ scope.row.fullResult }}
                         </div>
                       </template>
@@ -270,7 +270,7 @@
                       <div>{{ matchItemAawy.homeName }}</div>
                       <div style="margin-left: 4px; margin-right: 4px">--</div>
                       <div>{{ matchItemAawy.awayName }}</div>
-                      <div style="font-size: 20px; color: aquamarine">
+                      <div style="font-size: 20px; color: #b8860b">
                         {{ matchItemAawy.fullResult }}
                       </div>
                       <div>{{ matchItemAawy.matchTime }}</div>
@@ -332,7 +332,7 @@
                     </el-table-column>
                     <el-table-column prop="fullResult" label="结果" width="60">
                       <template #default="scope">
-                        <div style="font-size: 20px; color: aquamarine">
+                        <div style="font-size: 20px; color: #b8860b">
                           {{ scope.row.fullResult }}
                         </div>
                       </template>
@@ -1007,7 +1007,7 @@ export default defineComponent({
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  // box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* 卡片内容 */
