@@ -738,7 +738,6 @@ export default defineComponent({
   name: "toDayMatch",
   components: {},
   props: {},
-  emits: ["success"],
   setup(props, { emit }) {
     const footballStore = useFootballStore();
     const { appContext } = getCurrentInstance();

@@ -26,7 +26,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
+  watch,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 // 路由接口
 interface footBallInterface {
@@ -59,6 +66,11 @@ export default defineComponent({
           id: 2,
           routePath: "/FootBall/TeamSetting",
         },
+        // {
+        //   name: "FT助手",
+        //   id: 3,
+        //   routePath: "/AIChat/DeepSeekChat",
+        // },
       ],
       currentId: 1,
     });
@@ -69,6 +81,13 @@ export default defineComponent({
         path: itemValue.routePath,
       });
     }
+
+    onMounted(() => {
+      router.push({
+        path: "/FootBall/ToDayMatch",
+      });
+    });
+
     return {
       state,
       toRoutePath,
@@ -83,11 +102,10 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
 
   .home-top-workbend-content {
     min-width: 1500px;
@@ -146,5 +164,6 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 }
 </style>
