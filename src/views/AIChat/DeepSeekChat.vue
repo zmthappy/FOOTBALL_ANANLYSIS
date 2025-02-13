@@ -78,9 +78,6 @@ client.value = new OpenAI({
   // 硅基流动的apikey
   apiKey: "sk-kqkycrgulntjkzhfmsjiekfjkpwsbspohjerodqbxezorqms", // 模型APIKey
   baseURL: "https://api.siliconflow.cn/v1", // 模型API地址
-  // deepseek的apikey
-  // apiKey: '', // 模型APIKey
-  // baseURL: 'https://api.deepseek.com', // 模型API地址
   dangerouslyAllowBrowser: true,
 });
 
@@ -106,9 +103,7 @@ const fetchData = async (ques: string) => {
     loading: true,
   });
   const completion = await client.value!.chat.completions.create({
-    // model: 'gpt-4o-mini', // 替换为自己的model名称
-    model: "deepseek-ai/DeepSeek-R1", // 替换为自己的model名称
-    // model: 'deepseek-chat', // 替换为自己的model名称
+    model: "deepseek-ai/DeepSeek-V3", // 替换为自己的model名称
     messages: [{ role: "user", content: ques }],
     stream: true, // 为 true 则开启接口的流式返回
   });

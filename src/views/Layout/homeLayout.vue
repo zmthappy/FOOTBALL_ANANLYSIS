@@ -66,11 +66,11 @@ export default defineComponent({
           id: 2,
           routePath: "/FootBall/TeamSetting",
         },
-        // {
-        //   name: "FT助手",
-        //   id: 3,
-        //   routePath: "/AIChat/DeepSeekChat",
-        // },
+        {
+          name: "FT助手",
+          id: 3,
+          routePath: "/AIChat/DeepSeekChat",
+        },
       ],
       currentId: 1,
     });

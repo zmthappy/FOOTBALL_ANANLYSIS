@@ -725,6 +725,7 @@
 <script lang="ts">
 import dayjs from "dayjs";
 import { useFootballStore } from "@/pinia/footballPinia";
+import FTTable from "@/components/FTTable.vue";
 import {
   defineComponent,
   getCurrentInstance,
@@ -736,7 +737,7 @@ import {
 } from "vue";
 export default defineComponent({
   name: "toDayMatch",
-  components: {},
+  components: { FTTable },
   props: {},
   setup(props, { emit }) {
     const footballStore = useFootballStore();

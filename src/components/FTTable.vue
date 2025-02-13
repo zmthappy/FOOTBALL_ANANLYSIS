@@ -126,8 +126,6 @@ function useMain() {
       column: column,
     });
   }
-
-  //   分页信息
   //   分页数改变
   function handleSizeChange(val: number) {
     props.tableOption.pageSize = val;
