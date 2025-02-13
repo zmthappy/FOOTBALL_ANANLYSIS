@@ -46,7 +46,7 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="60"
+                      width="75"
                       show-overflow-tooltip
                     />
                     <el-table-column
@@ -102,7 +102,7 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="60"
+                      width="75"
                       show-overflow-tooltip
                     />
                     <el-table-column
@@ -164,7 +164,7 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="60"
+                      width="75"
                       show-overflow-tooltip
                     />
                     <el-table-column
@@ -220,7 +220,7 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="60"
+                      width="75"
                       show-overflow-tooltip
                     />
                     <el-table-column
@@ -312,7 +312,7 @@
                     <el-table-column
                       prop="leagueName"
                       label="联赛"
-                      width="60"
+                      width="75"
                       show-overflow-tooltip
                     />
                     <el-table-column
@@ -837,7 +837,7 @@ export default defineComponent({
 
     function predictPrecentchange(val, item) {
       let index = state.predictPrecent.findIndex(
-        (t) => t.matchId == item.matchId,
+        (t) => t.matchId == item.matchId
       );
       if (index !== -1) {
         for (const prediceItem of state.predictPrecent) {
