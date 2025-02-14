@@ -475,7 +475,13 @@
                             font-size: 24px;
                           "
                         >
-                          {{ item.score[1] }}
+                          {{ item.score[1]
+                          }}<el-icon
+                            :size="16"
+                            style="cursor: pointer"
+                            @click="copyTitle(item)"
+                            ><DocumentCopy
+                          /></el-icon>
                         </div>
                       </el-form-item>
                     </el-col>
@@ -732,6 +738,9 @@ import {
   ref,
   toRefs,
 } from "vue";
+import useClipboard from "vue-clipboard3";
+import { splitFunc } from "@/utils/pulicUtils";
+import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "toDayMatch",
   components: {},
@@ -740,6 +749,7 @@ export default defineComponent({
     const footballStore = useFootballStore();
     const { appContext } = getCurrentInstance();
     const cardFootballRef = ref(null);
+    const { toClipboard } = useClipboard();
     const request = appContext.config.globalProperties.$https;
     const state = reactive({
       matchToday: [],
@@ -876,6 +886,16 @@ export default defineComponent({
       return className;
     }
 
+    // 复制固定模版
+    async function copyTitle(row) {
+      await toClipboard(`请结合球队伤停和近六场的表现与亚盘大小球${row.bigsmall}和亚盘初始盘口${row.homeName}${row["365First"]}，
+      退至${row.homeName}${row["365End"]}，给出今天${row.homeName}主场面对${row.awayName}的预测结果和比分预测`);
+      ElMessage({
+        message: "内容复制成功",
+        type: "success",
+      });
+    }
+
     onMounted(() => {
       console.log(footballStore.test, "foot");
     });
@@ -889,6 +909,7 @@ export default defineComponent({
       cardFootballRef,
       predictPrecentchange,
       prediceResultWhoChange,
+      copyTitle,
     };
   },
 });
