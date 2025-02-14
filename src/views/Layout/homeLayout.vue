@@ -71,6 +71,11 @@ export default defineComponent({
           id: 3,
           routePath: "/AIChat/DeepSeekChat",
         },
+        {
+          name: "betHistory",
+          id: 4,
+          routePath: "/FootBall/BetMatchTable",
+        },
       ],
       currentId: 1,
     });

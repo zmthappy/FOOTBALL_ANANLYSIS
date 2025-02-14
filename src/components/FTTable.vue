@@ -75,6 +75,7 @@ const props = defineProps({
         pageSizes: [50, 100, 200, 300],
         total: 100, //总数
         tableSelectd: [], //选中的行数
+        loading: false,
       };
     },
   },

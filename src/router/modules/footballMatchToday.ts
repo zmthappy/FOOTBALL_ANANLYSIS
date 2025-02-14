@@ -17,6 +17,14 @@ const routeres: Array<RouteRecordRaw> = [
       title: "球队定位",
     },
   },
+  {
+    path: "/FootBall/BetMatchTable",
+    name: "betMatchTable",
+    component: () => import("@/views/FootBall/BetMatchTable.vue"),
+    meta: {
+      title: "投注数据",
+    },
+  },
 ];
 
 export default routeres;

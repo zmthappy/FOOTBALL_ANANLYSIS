@@ -718,14 +718,11 @@
         </div>
       </div>
     </div>
-    <!-- 获取数据刷新效果页面 -->
-    <!-- <div class="card-container" v-else ></div> -->
   </div>
 </template>
 <script lang="ts">
 import dayjs from "dayjs";
 import { useFootballStore } from "@/pinia/footballPinia";
-import FTTable from "@/components/FTTable.vue";
 import {
   defineComponent,
   getCurrentInstance,
@@ -737,7 +734,7 @@ import {
 } from "vue";
 export default defineComponent({
   name: "toDayMatch",
-  components: { FTTable },
+  components: {},
   props: {},
   setup(props, { emit }) {
     const footballStore = useFootballStore();
@@ -837,7 +834,7 @@ export default defineComponent({
 
     function predictPrecentchange(val, item) {
       let index = state.predictPrecent.findIndex(
-        (t) => t.matchId == item.matchId
+        (t) => t.matchId == item.matchId,
       );
       if (index !== -1) {
         for (const prediceItem of state.predictPrecent) {
