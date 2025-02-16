@@ -844,7 +844,7 @@ export default defineComponent({
 
     function predictPrecentchange(val, item) {
       let index = state.predictPrecent.findIndex(
-        (t) => t.matchId == item.matchId,
+        (t) => t.matchId == item.matchId
       );
       if (index !== -1) {
         for (const prediceItem of state.predictPrecent) {
@@ -888,8 +888,9 @@ export default defineComponent({
 
     // 复制固定模版
     async function copyTitle(row) {
-      await toClipboard(`请结合球队伤停和近六场的表现与亚盘大小球${row.bigsmall}和亚盘初始盘口${row.homeName}${row["365First"]}，
-      退至${row.homeName}${row["365End"]}，给出今天${row.homeName}主场面对${row.awayName}的预测结果和比分预测`);
+      await toClipboard(
+        `请结合球队伤停和近六场的表现与亚盘大小球${row.bigsmall}和亚盘初始盘口${row.homeName}${row["365First"]}，变成${row.homeName}${row["365End"]}，给出今天${row.homeName}主场面对${row.awayName}的预测结果和比分预测`
+      );
       ElMessage({
         message: "内容复制成功",
         type: "success",
