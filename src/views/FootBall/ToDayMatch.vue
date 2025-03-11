@@ -25,6 +25,402 @@
     >
       <div class="card" v-for="item in state.matchToday" :key="item.matchId">
         <div class="card-top-content">
+          <!-- 机构分析 -->
+          <div class="card-top-title">
+            INSTITUTION分析【{{ item.leagueName }}】
+          </div>
+          <div class="flex-layout">
+            <div class="flex-layout base-message">
+              <div class="card-team-name">{{ item.homeName }}</div>
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="HOME排名">
+                        <div
+                          style="
+                            font-size: 20px;
+                            color: var(--primary-focus-color--);
+                          "
+                        >
+                          {{ item.homeRank }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="HOME-上赛季">
+                        <div
+                          style="
+                            font-size: 20px;
+                            color: var(--primary-focus-color--);
+                          "
+                        >
+                          {{ item.thePreviousRankHome }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="IN主场排名">
+                        <div>
+                          {{ item.inHomeRank ? item.inHomeRank : "**" }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="两年排名">
+                        <div>
+                          {{
+                            item.ThreeSeasonAverageHome
+                              ? item.ThreeSeasonAverageHome
+                              : "**"
+                          }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+            <div class="flex-layout base-message">
+              <div class="card-team-name">{{ item.awayName }}</div>
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="AWAY排名">
+                        <div
+                          style="
+                            font-size: 20px;
+                            color: var(--primary-focus-color--);
+                          "
+                        >
+                          {{ item.awayRank }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="AWAY--上赛季">
+                        <div
+                          style="
+                            font-size: 20px;
+                            color: var(--primary-focus-color--);
+                          "
+                        >
+                          {{ item.thePreviousRankAway }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="IN客场排名">
+                        <div>
+                          {{ item.inAwayRank ? item.inAwayRank : "**" }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="两年排名">
+                        <div>
+                          {{
+                            item.ThreeSeasonAverageAway
+                              ? item.ThreeSeasonAverageAway
+                              : "**"
+                          }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+          </div>
+          <div class="flex-layout">
+            <div class="flex-layout base-message">
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="必发信息">
+                        <div>{{ item.betWayList }}</div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="必发对比">
+                        <div>{{ item.betWayInfor }}</div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="基础面信息">
+                        <div>{{ item.baseTypeInformaion }}</div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="大小球">
+                        <div>{{ item.bigsmall }}</div>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+            <div class="flex-layout base-message">
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="赛果">
+                        <div
+                          style="
+                            color: var(--primary-focus-color--);
+                            font-size: 24px;
+                          "
+                        >
+                          {{ item.score[1]
+                          }}<el-icon
+                            :size="16"
+                            style="cursor: pointer"
+                            @click="copyTitle(item)"
+                            ><DocumentCopy
+                          /></el-icon>
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="让球结果">
+                        <div>{{ item.whoIsSrong }}</div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="预测结果">
+                        <el-radio-group
+                          v-model="item.prediceResult"
+                          @change="(val) => predictchange(val, item)"
+                        >
+                          <el-radio :label="0">无</el-radio>
+                          <el-radio :label="1">胜</el-radio>
+                          <el-radio :label="2">平</el-radio>
+                          <el-radio :label="3">负</el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="预测结果">
+                        <el-checkbox-group
+                          v-model="item.prediceResultWho"
+                          @change="(val) => prediceResultWhoChange(val, item)"
+                        >
+                          <el-checkbox label="让胜" />
+                          <el-checkbox label="让平" />
+                          <el-checkbox label="让负" />
+                        </el-checkbox-group>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="预测概率">
+                        <el-radio-group
+                          v-model="item.prediceResultPrecent"
+                          @change="(val) => predictPrecentchange(val, item)"
+                        >
+                          <el-radio :label="0">+++</el-radio>
+                          <el-radio :label="1">++</el-radio>
+                          <el-radio :label="2">+</el-radio>
+                          <el-radio :label="3">0</el-radio>
+                          <el-radio :label="4">-</el-radio>
+                          <el-radio :label="5">--</el-radio>
+                          <el-radio :label="6">---</el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-top-content">
+          <!-- 盘口对比 -->
+          <div class="card-top-title">PK对比</div>
+          <div class="flex-layout">
+            <div class="flex-layout base-message">
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="相同对手">
+                        <div class="focus-font-style">
+                          {{ item.subSameOpponentPK
+                          }}{{
+                            item.subSameOpponent
+                              ? "-" + item.subSameOpponent
+                              : ""
+                          }}
+                          {{
+                            item.oppomnentTeamGapDays
+                              ? "-" + item.oppomnentTeamGapDays + "天"
+                              : ""
+                          }}
+                          <span style="font-size: 12px">
+                            {{
+                              item.oppomnentTeamVisiterHomeTime
+                                ? "[主：" + item.oppomnentTeamVisiterHomeTime
+                                : ""
+                            }}{{
+                              item.oppomnentTeamAwayTime
+                                ? "==客：" + item.oppomnentTeamAwayTime + "]"
+                                : ""
+                            }}
+                          </span>
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="理论盘口">
+                        <el-popover
+                          placement="right"
+                          title="上轮交锋信息"
+                          :width="200"
+                          trigger="hover"
+                        >
+                          <template #reference>
+                            <div class="focus-font-style">
+                              {{ item.theoryHandicap }}
+                            </div>
+                          </template>
+                          <div>
+                            <el-form label-width="80px" label-suffix=":">
+                              <el-row>
+                                <el-col :span="24">
+                                  <el-form-item label="初盘">
+                                    <div class="focus-font-style">
+                                      {{ item["365ChuShangLun"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                                <el-col :span="24">
+                                  <el-form-item label="终盘">
+                                    <div class="focus-font-style">
+                                      {{ item["365ZOngShangLun"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                                <el-col :span="24">
+                                  <el-form-item label="时间">
+                                    <div class="focus-font-style">
+                                      {{ item["365MatchTimeShangLun"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                                <el-col :span="24">
+                                  <el-form-item label="PK定位">
+                                    <div class="focus-font-style">
+                                      {{ item["levelSubPositioning"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                                <el-col :span="24">
+                                  <el-form-item label="上轮主场">
+                                    <div class="focus-font-style">
+                                      {{ item["homeTeamShanglun"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                                <el-col :span="24">
+                                  <el-form-item label="上轮赛果">
+                                    <div class="focus-font-style">
+                                      {{ item["shangLunAmidithion"] }}
+                                    </div>
+                                  </el-form-item>
+                                </el-col>
+                              </el-row>
+                            </el-form>
+                          </div>
+                        </el-popover>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="排名盘口">
+                        <div class="focus-font-style">
+                          {{ item.TfinallyPk }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="各自主客定位">
+                        <div class="focus-font-style">
+                          {{ item.respectivePk }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="初始盘口">
+                        <div class="focus-font-style">
+                          {{ item["365First"] }}
+                        </div>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="变化盘口">
+                        <div class="focus-font-style">{{ item["365End"] }}</div>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+            <div class="flex-layout base-message">
+              <div class="base-tema-information">
+                <el-form label-width="120px" label-suffix="-->">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-form-item label="威廉">
+                        <span class="start-pk"
+                          >初：{{ item.firstoddswiilian }}</span
+                        >
+                        <span class="final-pk"
+                          >变：{{ item.endoddswillian }}</span
+                        >
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="立博">
+                        <span class="start-pk"
+                          >初：{{ item.firstoddslibo }}</span
+                        >
+                        <span class="final-pk">变：{{ item.endoddslibo }}</span>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="365">
+                        <span class="start-pk"
+                          >初：{{ item.firstodds365 }}</span
+                        >
+                        <span class="final-pk">变：{{ item.endodds365 }}</span>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="平博">
+                        <span class="start-pk"
+                          >初：{{ item.firstoddsPin }}</span
+                        >
+                        <span class="final-pk">变：{{ item.endoddsPin }}</span>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="澳门">
+                        <span class="start-pk"
+                          >初：{{ item.firstoddsaomen }}</span
+                        >
+                        <span class="final-pk"
+                          >变：{{ item.endoddsaomen }}</span
+                        >
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-top-content">
           <!-- 对局对比 -->
           <div class="card-top-title">近六场比赛</div>
           <div class="flex-layout" style="align-items: flex-start">
@@ -349,379 +745,6 @@
             </div>
           </div>
         </div>
-        <div class="card-top-content">
-          <!-- 机构分析 -->
-          <div class="card-top-title">
-            INSTITUTION分析【{{ item.leagueName }}】
-          </div>
-          <div class="flex-layout">
-            <div class="flex-layout base-message">
-              <div class="card-team-name">{{ item.homeName }}</div>
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="HOME排名">
-                        <div
-                          style="
-                            font-size: 20px;
-                            color: var(--primary-focus-color--);
-                          "
-                        >
-                          {{ item.homeRank }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="IN主场排名">
-                        <div>
-                          {{ item.inHomeRank ? item.inHomeRank : "**" }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="两年排名">
-                        <div>
-                          {{
-                            item.ThreeSeasonAverageHome
-                              ? item.ThreeSeasonAverageHome
-                              : "**"
-                          }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-            <div class="flex-layout base-message">
-              <div class="card-team-name">{{ item.awayName }}</div>
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="AWAY排名">
-                        <div
-                          style="
-                            font-size: 20px;
-                            color: var(--primary-focus-color--);
-                          "
-                        >
-                          {{ item.awayRank }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="IN客场排名">
-                        <div>
-                          {{ item.inAwayRank ? item.inAwayRank : "**" }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="两年排名">
-                        <div>
-                          {{
-                            item.ThreeSeasonAverageAway
-                              ? item.ThreeSeasonAverageAway
-                              : "**"
-                          }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-          </div>
-          <div class="flex-layout">
-            <div class="flex-layout base-message">
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="必发信息">
-                        <div>{{ item.betWayList }}</div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="必发对比">
-                        <div>{{ item.betWayInfor }}</div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="基础面信息">
-                        <div>{{ item.baseTypeInformaion }}</div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="大小球">
-                        <div>{{ item.bigsmall }}</div>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-            <div class="flex-layout base-message">
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="赛果">
-                        <div
-                          style="
-                            color: var(--primary-focus-color--);
-                            font-size: 24px;
-                          "
-                        >
-                          {{ item.score[1]
-                          }}<el-icon
-                            :size="16"
-                            style="cursor: pointer"
-                            @click="copyTitle(item)"
-                            ><DocumentCopy
-                          /></el-icon>
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="让球结果">
-                        <div>{{ item.whoIsSrong }}</div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="预测结果">
-                        <el-radio-group
-                          v-model="item.prediceResult"
-                          @change="(val) => predictchange(val, item)"
-                        >
-                          <el-radio :label="0">无</el-radio>
-                          <el-radio :label="1">胜</el-radio>
-                          <el-radio :label="2">平</el-radio>
-                          <el-radio :label="3">负</el-radio>
-                        </el-radio-group>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="预测结果">
-                        <el-radio-group
-                          v-model="item.prediceResultWho"
-                          @change="(val) => prediceResultWhoChange(val, item)"
-                        >
-                          <el-radio :label="0">无</el-radio>
-                          <el-radio :label="4">让胜</el-radio>
-                          <el-radio :label="5">让平</el-radio>
-                          <el-radio :label="6">让负</el-radio>
-                        </el-radio-group>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="预测概率">
-                        <el-radio-group
-                          v-model="item.prediceResultPrecent"
-                          @change="(val) => predictPrecentchange(val, item)"
-                        >
-                          <el-radio :label="0">+++</el-radio>
-                          <el-radio :label="1">++</el-radio>
-                          <el-radio :label="2">+</el-radio>
-                          <el-radio :label="3">0</el-radio>
-                          <el-radio :label="4">-</el-radio>
-                          <el-radio :label="5">--</el-radio>
-                          <el-radio :label="6">---</el-radio>
-                        </el-radio-group>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-top-content">
-          <!-- 盘口对比 -->
-          <div class="card-top-title">PK对比</div>
-          <div class="flex-layout">
-            <div class="flex-layout base-message">
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="相同对手">
-                        <div class="focus-font-style">
-                          {{ item.subSameOpponentPK
-                          }}{{
-                            item.subSameOpponent
-                              ? "-" + item.subSameOpponent
-                              : ""
-                          }}
-                          {{
-                            item.oppomnentTeamGapDays
-                              ? "-" + item.oppomnentTeamGapDays + "天"
-                              : ""
-                          }}
-                          <span style="font-size: 12px">
-                            {{
-                              item.oppomnentTeamVisiterHomeTime
-                                ? "[主：" + item.oppomnentTeamVisiterHomeTime
-                                : ""
-                            }}{{
-                              item.oppomnentTeamAwayTime
-                                ? "==客：" + item.oppomnentTeamAwayTime + "]"
-                                : ""
-                            }}
-                          </span>
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="理论盘口">
-                        <el-popover
-                          placement="right"
-                          title="上轮交锋信息"
-                          :width="200"
-                          trigger="hover"
-                        >
-                          <template #reference>
-                            <div class="focus-font-style">
-                              {{ item.theoryHandicap }}
-                            </div>
-                          </template>
-                          <div>
-                            <el-form label-width="80px" label-suffix=":">
-                              <el-row>
-                                <el-col :span="24">
-                                  <el-form-item label="初盘">
-                                    <div class="focus-font-style">
-                                      {{ item["365ChuShangLun"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                                <el-col :span="24">
-                                  <el-form-item label="终盘">
-                                    <div class="focus-font-style">
-                                      {{ item["365ZOngShangLun"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                                <el-col :span="24">
-                                  <el-form-item label="时间">
-                                    <div class="focus-font-style">
-                                      {{ item["365MatchTimeShangLun"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                                <el-col :span="24">
-                                  <el-form-item label="PK定位">
-                                    <div class="focus-font-style">
-                                      {{ item["levelSubPositioning"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                                <el-col :span="24">
-                                  <el-form-item label="上轮主场">
-                                    <div class="focus-font-style">
-                                      {{ item["homeTeamShanglun"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                                <el-col :span="24">
-                                  <el-form-item label="上轮赛果">
-                                    <div class="focus-font-style">
-                                      {{ item["shangLunAmidithion"] }}
-                                    </div>
-                                  </el-form-item>
-                                </el-col>
-                              </el-row>
-                            </el-form>
-                          </div>
-                        </el-popover>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="排名盘口">
-                        <div class="focus-font-style">
-                          {{ item.TfinallyPk }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="各自主客定位">
-                        <div class="focus-font-style">
-                          {{ item.respectivePk }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="初始盘口">
-                        <div class="focus-font-style">
-                          {{ item["365First"] }}
-                        </div>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="变化盘口">
-                        <div class="focus-font-style">{{ item["365End"] }}</div>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-            <div class="flex-layout base-message">
-              <div class="base-tema-information">
-                <el-form label-width="120px" label-suffix="-->">
-                  <el-row>
-                    <el-col :span="24">
-                      <el-form-item label="威廉">
-                        <span class="start-pk"
-                          >初：{{ item.firstoddswiilian }}</span
-                        >
-                        <span class="final-pk"
-                          >变：{{ item.endoddswillian }}</span
-                        >
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="立博">
-                        <span class="start-pk"
-                          >初：{{ item.firstoddslibo }}</span
-                        >
-                        <span class="final-pk">变：{{ item.endoddslibo }}</span>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="365">
-                        <span class="start-pk"
-                          >初：{{ item.firstodds365 }}</span
-                        >
-                        <span class="final-pk">变：{{ item.endodds365 }}</span>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="平博">
-                        <span class="start-pk"
-                          >初：{{ item.firstoddsPin }}</span
-                        >
-                        <span class="final-pk">变：{{ item.endoddsPin }}</span>
-                      </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                      <el-form-item label="澳门">
-                        <span class="start-pk"
-                          >初：{{ item.firstoddsaomen }}</span
-                        >
-                        <span class="final-pk"
-                          >变：{{ item.endoddsaomen }}</span
-                        >
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -784,7 +807,7 @@ export default defineComponent({
         res.Data.forEach((item) => {
           item.prediceResult = 0;
           item.prediceResultPrecent = 3;
-          item.prediceResultWho = 0;
+          item.prediceResultWho = [];
           for (const pItem of predictList) {
             if (pItem.matchId == item.matchId) {
               item.prediceResult = pItem.result;
@@ -844,7 +867,7 @@ export default defineComponent({
 
     function predictPrecentchange(val, item) {
       let index = state.predictPrecent.findIndex(
-        (t) => t.matchId == item.matchId
+        (t) => t.matchId == item.matchId,
       );
       if (index !== -1) {
         for (const prediceItem of state.predictPrecent) {
@@ -889,7 +912,7 @@ export default defineComponent({
     // 复制固定模版
     async function copyTitle(row) {
       await toClipboard(
-        `请结合球队伤停和近六场的表现与亚盘大小球${row.bigsmall}和亚盘初始盘口${row.homeName}${row["365First"]}，变成${row.homeName}${row["365End"]}，给出今天${row.homeName}主场面对${row.awayName}的预测结果和比分预测`
+        `请结合球队伤停和近六场的表现与亚盘大小球${row.bigsmall}和亚盘初始盘口${row.homeName}${row["365First"]}，变成${row.homeName}${row["365End"]}，给出今天${row.homeName}主场面对${row.awayName}的预测结果和比分预测`,
       );
       ElMessage({
         message: "内容复制成功",
