@@ -25,6 +25,14 @@ const routeres: Array<RouteRecordRaw> = [
       title: "投注数据",
     },
   },
+  {
+    path: "/FootBall/DeepChoiceMatch",
+    name: "DeepChoiceMatch",
+    component: () => import("@/views/FootBall/DeepChoiceMatch.vue"),
+    meta: {
+      title: "重点赛事",
+    },
+  },
 ];
 
 export default routeres;

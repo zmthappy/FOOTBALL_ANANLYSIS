@@ -1,18 +1,8 @@
 <template>
   <div class="main-content">
     <div class="main-button">
+      <div></div>
       <div>
-        <el-date-picker
-          v-model="state.queryTime"
-          type="date"
-          placeholder="选择时间"
-          size="default"
-          value-format="YYYY-MM-DD"
-          @change="searchTimeChange"
-        />
-      </div>
-      <div>
-        <el-button type="primary" @click="clearPredict">清除预测</el-button>
         <el-button type="primary" @click="getlist" :loading="state.cardRefresh"
           >重新获取</el-button
         >
@@ -194,6 +184,7 @@
                         <el-radio-group
                           v-model="item.prediceResult"
                           @change="(val) => predictchange(val, item)"
+                          disabled
                         >
                           <el-radio :label="0">无</el-radio>
                           <el-radio :label="1">胜</el-radio>
@@ -207,6 +198,7 @@
                         <el-checkbox-group
                           v-model="item.prediceResultWho"
                           @change="(val) => prediceResultWhoChange(val, item)"
+                          disabled
                         >
                           <el-checkbox label="让胜" />
                           <el-checkbox label="让平" />
@@ -219,6 +211,7 @@
                         <el-radio-group
                           v-model="item.prediceResultPrecent"
                           @change="(val) => predictPrecentchange(val, item)"
+                          disabled
                         >
                           <el-radio :label="0">+++</el-radio>
                           <el-radio :label="1">++</el-radio>
@@ -645,33 +638,33 @@
                     </el-table-column>
                   </el-table>
                   <!-- <el-col
-                    class="base-match-resule"
-                    :span="24"
-                    v-for="matchItemAawy in item.tenMatchResultInVisit"
-                    :key="matchItemAawy.matchId"
-                  >
-                    <div
-                      class="single-match-value"
-                      :class="
-                        matchItemAawy.amidithion == '负'
-                          ? 'single-match-lose'
-                          : matchItemAawy.amidithion == '平'
-                          ? 'single-match-draw'
-                          : ''
-                      "
+                      class="base-match-resule"
+                      :span="24"
+                      v-for="matchItemAawy in item.tenMatchResultInVisit"
+                      :key="matchItemAawy.matchId"
                     >
-                      <div>{{ matchItemAawy.amidithion }}</div>
-                      <div>{{ matchItemAawy.leagueName }}</div>
-                      <div>{{ matchItemAawy.firstAsiaHandicap }}</div>
-                      <div>{{ matchItemAawy.homeName }}</div>
-                      <div style="margin-left: 4px; margin-right: 4px">--</div>
-                      <div>{{ matchItemAawy.awayName }}</div>
-                      <div style="font-size: 20px; color: #b8860b">
-                        {{ matchItemAawy.fullResult }}
+                      <div
+                        class="single-match-value"
+                        :class="
+                          matchItemAawy.amidithion == '负'
+                            ? 'single-match-lose'
+                            : matchItemAawy.amidithion == '平'
+                            ? 'single-match-draw'
+                            : ''
+                        "
+                      >
+                        <div>{{ matchItemAawy.amidithion }}</div>
+                        <div>{{ matchItemAawy.leagueName }}</div>
+                        <div>{{ matchItemAawy.firstAsiaHandicap }}</div>
+                        <div>{{ matchItemAawy.homeName }}</div>
+                        <div style="margin-left: 4px; margin-right: 4px">--</div>
+                        <div>{{ matchItemAawy.awayName }}</div>
+                        <div style="font-size: 20px; color: #b8860b">
+                          {{ matchItemAawy.fullResult }}
+                        </div>
+                        <div>{{ matchItemAawy.matchTime }}</div>
                       </div>
-                      <div>{{ matchItemAawy.matchTime }}</div>
-                    </div>
-                  </el-col> -->
+                    </el-col> -->
                 </el-row>
                 <div class="six-match-sumResult">
                   {{ item.matchResultVisitVisor }}
@@ -756,13 +749,13 @@ import {
   defineComponent,
   getCurrentInstance,
   inject,
+  onActivated,
   onMounted,
   reactive,
   ref,
   toRefs,
 } from "vue";
 import useClipboard from "vue-clipboard3";
-import { splitFunc } from "@/utils/pulicUtils";
 import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "toDayMatch",
@@ -779,7 +772,6 @@ export default defineComponent({
       predict: [],
       predictWho: [],
       predictPrecent: [],
-      deepsavematch: [],
       cardRefresh: false,
       queryTime: dayjs().format("YYYY-MM-DD"),
       tableOption: {
@@ -792,70 +784,11 @@ export default defineComponent({
     });
     // 获取今日的数据
     async function getlist() {
-      cardFootballRef.value.scroll({
-        top: 0,
-        behavior: "smooth",
-      });
-      state.cardRefresh = true;
-      cardFootballRef.value.style = "overflow:hidden";
-      let predictList = JSON.parse(localStorage.getItem("predict")) || [];
-      let predictPrecent = JSON.parse(localStorage.getItem("predictTwo")) || [];
-      let predictWho = JSON.parse(localStorage.getItem("predictWho")) || [];
-      let res = await request.Post("/football", {
-        queryTime: state.queryTime,
-      });
-      if (res.State) {
-        res.Data.forEach((item) => {
-          item.prediceResult = 0;
-          item.prediceResultPrecent = 3;
-          item.prediceResultWho = [];
-          for (const pItem of predictList) {
-            if (pItem.matchId == item.matchId) {
-              item.prediceResult = pItem.result;
-            }
-          }
-          for (const pItem2 of predictPrecent) {
-            if (pItem2.matchId == item.matchId) {
-              item.prediceResultPrecent = pItem2.result;
-            }
-          }
-          for (const pItem3 of predictWho) {
-            if (pItem3.matchId == item.matchId) {
-              item.prediceResultWho = pItem3.result;
-            }
-          }
-        });
-        state.matchToday = res.Data;
-      }
-      cardFootballRef.value.style = "";
-      state.cardRefresh = false;
+      let deepSaveMatch = JSON.parse(localStorage.getItem("deepSave"))
+        ? JSON.parse(localStorage.getItem("deepSave"))
+        : [];
+      state.matchToday = deepSaveMatch;
     }
-
-    // 设置重点关注的比赛
-    function setDeepSave(matchItem) {
-      let index = JSON.parse(localStorage.getItem("deepSave"))
-        ? JSON.parse(localStorage.getItem("deepSave")).findIndex(
-            (t: any) => t.matchId == matchItem.matchId,
-          )
-        : -1;
-      if (matchItem.prediceResultPrecent <= 3) {
-        if (index == -1 || state.deepsavematch.length == 0) {
-          state.deepsavematch.push(matchItem);
-        }
-      } else {
-        if (index !== -1) {
-          let arr = [];
-          state.deepsavematch.forEach((item) => {
-            if (item.matchId != matchItem.matchId) {
-              arr.push(item);
-            }
-          });
-          state.deepsavematch = JSON.parse(JSON.stringify(arr));
-        }
-      }
-      localStorage.setItem("deepSave", JSON.stringify(state.deepsavematch));
-    }
-
     // 预测改变
     function predictchange(val, item) {
       let index = state.predict.findIndex((t) => t.matchId == item.matchId);
@@ -871,7 +804,6 @@ export default defineComponent({
           matchId: item.matchId,
         });
       }
-      setDeepSave(item);
       localStorage.setItem("predict", JSON.stringify(state.predict));
     }
 
@@ -890,7 +822,6 @@ export default defineComponent({
           matchId: item.matchId,
         });
       }
-      setDeepSave(item);
       localStorage.setItem("predictWho", JSON.stringify(state.predictWho));
     }
 
@@ -910,18 +841,9 @@ export default defineComponent({
           matchId: item.matchId,
         });
       }
-      setDeepSave(item);
       localStorage.setItem("predictTwo", JSON.stringify(state.predictPrecent));
     }
 
-    // 清空缓存
-    function clearPredict() {
-      localStorage.clear();
-    }
-    // 重新获取
-    function searchTimeChange() {
-      getlist();
-    }
     // 设置赛果不同的行样式
     function setRowClass({ row }) {
       let className = "single-match-lose";
@@ -950,15 +872,16 @@ export default defineComponent({
       });
     }
 
-    onMounted(() => {
-      console.log(footballStore.test, "foot");
+    onMounted(() => {});
+
+    onActivated(() => {
+      getlist();
     });
+
     return {
       state,
       getlist,
       predictchange,
-      clearPredict,
-      searchTimeChange,
       setRowClass,
       cardFootballRef,
       predictPrecentchange,

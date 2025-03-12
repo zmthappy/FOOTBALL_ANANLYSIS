@@ -62,6 +62,11 @@ export default defineComponent({
           routePath: "/FootBall/ToDayMatch",
         },
         {
+          name: "重点赛事",
+          id: 5,
+          routePath: "/FootBall/DeepChoiceMatch",
+        },
+        {
           name: "球队定位",
           id: 2,
           routePath: "/FootBall/TeamSetting",
